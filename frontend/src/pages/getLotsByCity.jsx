@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function App() {
+export default function GetLotsByCity() {
   const [city, setCity] = useState("");
   const [lots, setLots] = useState([]);
   const [error, setError] = useState("");
@@ -13,8 +13,8 @@ function App() {
     }
 
     try {
-      const response = await axios.post("http://localhost:4000/api/lot/getLotsByCity", { city });
-      setLots(response.data);
+      const response = await axios.post("/api/lot/getLotsByCity", { city });
+      setLots(response.data.lotsCity);
       setError("");
     } catch (err) {
       setError(err.response?.data?.msg || "Something went wrong");
@@ -57,8 +57,4 @@ function App() {
       )}
     </div>
   );
-
-
 }
-
-export default App

@@ -16,7 +16,7 @@ export const authorize = async(req, res, next) => {
 
         const userId = decoded.userId;
         const user = await User.findById(userId);
-        req.user = userId;
+        req.user = user;
         
         next()
     } catch (error) {

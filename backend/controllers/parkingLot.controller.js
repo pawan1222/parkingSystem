@@ -44,3 +44,20 @@ export const addLots = async(req,res) => {
 
     }
 }
+
+export const getLotsByCity = async(req,res) => {
+    const {city} = req.body;
+
+    if(!city){
+        return res.status(401).json({msg : "mandatory field city"})
+    }
+
+    const lotsCity =await parkingLot.find({city});
+    
+    if(!lotsCity){
+        return res.status(401).json({msg : "City not Available"})
+    }
+
+    return res.status(200).json({lotsCity});
+    
+}
