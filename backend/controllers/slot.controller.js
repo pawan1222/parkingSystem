@@ -2,8 +2,9 @@ import { Slot } from "../models/slot.model.js";
 
 export const getSlotsByLotId = async(req,res) => {
  try {
-   const {lotId} = req.params;
     
+    
+   const {lotId} = req.params;
     
 
     if(!lotId){
