@@ -10,8 +10,8 @@ export const bookTicket = async (req, res) => {
         return res.status(401).json({ msg: "slot not available" });
     }
 
-    
-    
+
+
 
     let vehicle = await Vehicle.findOne({ vehicleNumber });
 
@@ -28,16 +28,18 @@ export const bookTicket = async (req, res) => {
 
     let end = new Date(endTime)
     let start = new Date(startTime)
+    console.log(start);
+
     let diffMilli = end - start
-    
-    
-    
+
+
+
     let hours = diffMilli / (1000 * 60 * 60);
-    
+
 
     let charges = Number(hours * 20);
-    
-    
+
+
 
     const bookedTicket = await Booking.create({
         vehicleId: vehicle._id,
@@ -52,19 +54,21 @@ export const bookTicket = async (req, res) => {
         return res.status(401).json({ msg: "unable to book ticket" });
     }
 
-    
 
-    slot.status = "occupied"
-    await slot.save();
-    return res.status(201).json({ msg: "ticket booked successfully", ticket: bookedTicket });
+
+    setTimeout(async() => {
+        slot.status = "occupied"
+        await slot.save();
+    } , (start - Date.now()))
+
+
+    setTimeout(async () => {
+        bookedTicket.status = "completed";
+        slot.status = "available";
+        await bookedTicket.save();
+        await slot.save();
+    }, diffMilli + (start - Date.now()));
+
+
+    return res.status(201).json({ msg: "ticket booked successfully", ticket: { bookedTicket, vehicleNumber } });
 }
-
-
-
-
-
-
-
-
-
-

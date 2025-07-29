@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Slots() {
-  const { lotId } = useParams(); // lotId
+  const { lotId } = useParams();
   const [slots, setSlots] = useState([]);
   const [error, setError] = useState("");
 
@@ -46,6 +46,14 @@ export default function Slots() {
               }`}
             >
               <p><strong>Status:</strong> {slot.status}</p>
+              {slot.status === "available" && (
+                <Link
+                  to={`/booking/${slot._id}`}
+                  className="mt-2 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                >
+                  Book Slot
+                </Link>
+              )}
             </li>
           ))}
         </ul>
