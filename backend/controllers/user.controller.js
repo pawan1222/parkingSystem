@@ -9,14 +9,14 @@ export const SignUp = async(req,res) => {
     
     try {
         if(!name || !email || !password){
-            res.status(400).json({msg : "All fields are mandatory"});
+           return res.status(400).json({msg : "All fields are mandatory"});
         }
         if(password.length < 6){
-            res.status(400).json({msg : "Password Length should be at least 6"})
+           return res.status(400).json({msg : "Password Length should be at least 6"})
         }
         const isValid = await User.findOne({email});
         if(isValid){
-            res.status(404).json({msg : "user Already Exists "});
+           return res.status(404).json({msg : "user Already Exists "});
         }
 
         const  hashedPassword = await bcrypt.hash(password,10);
@@ -32,7 +32,7 @@ export const SignUp = async(req,res) => {
 
 
 
-        res.status(200).json({msg : "USer registered successfully",user:user})
+       return res.status(200).json({msg : "USer registered successfully",user:user})
 
         
     } catch (error) {
@@ -47,35 +47,45 @@ export const login = async (req,res) =>{
     try {
         const user = await User.findOne({email });
         if(!user){
-            res.status(400).json({msg : "Invalid Credentials!"});
+            return res.status(400).json({msg : "Invalid Credentials!"});
         }
 
         const isPasswordCorrect = await bcrypt.compare(password,user.password);
         if(!isPasswordCorrect){
-            res.status(400).json({msg : "Invalid Credentials!"});
+            return res.status(400).json({msg : "Invalid Credentials!"});
         }
 
         generateToken(user._id,res);
    
         return res.status(200).json({
+            user : user,
             _id : user._id,
             fullName : user.fullName,
             email : user.email,
         })
     } catch (error) {
         console.log("Error in login controller",error.message);
-        res.status(500).json({msg : "Internal Server Error"});
+        return res.status(500).json({msg : "Internal Server Error"});
     }
 };
 
 export const logout = async(req,res) =>{
-    console.log(req.user);
     
     try {
         res.cookie("jwt","",{maxAge : 0});
-        res.status(200).json({msg : "Logged out successfully"})
+        return res.status(200).json({msg : "Logged out successfully" })
     } catch (error) {
         console.log("Error in logout controller",error.message);
+        return res.status(500).json({msg : "Internal Server Error"});
+    }
+}
+
+export const currentUser = async(req,res) =>{
+    
+    try {
+        return res.status(200).json({user : req.user})
+    } catch (error) {
+        console.log("Error in currentUser controller",error.message);
         res.status(500).json({msg : "Internal Server Error"});
     }
 }
