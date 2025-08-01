@@ -27,12 +27,11 @@ export default function Lots() {
         { withCredentials: true }
       );
       setLots(res.data.lotsCity || []);
-      
-      
     } catch (err) {
       setError("Failed to fetch lots.");
       setLots([]);
-      setIsLoading(false);
+    } finally{
+        setIsLoading(false);
     }
   };
 

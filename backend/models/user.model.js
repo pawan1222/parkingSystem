@@ -18,7 +18,13 @@ const userSchema = new mongoose.Schema({
         type : String,
         enum : ["admin","user"],
         default : "user"
-    }
+    },
+    lots: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "parkingLot",
+    },
+  ],
     
 },{timestamps : true});
 

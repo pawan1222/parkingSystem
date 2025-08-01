@@ -7,6 +7,9 @@ import Lots from "./pages/Lots";
 import Slots from "./pages/Slots";
 import Navbar from "./pages/Navbar";
 import Booking from "./pages/Booking";
+import TicketHistory from "./pages/TicketHistory";
+import ViewLots from "./pages/ViewLots";
+import AddLots from "./pages/AddLots";
 
 
 function App() {
@@ -21,6 +24,11 @@ function App() {
           <Route path="lotsByCity" element={<Lots />} />
           <Route path="slots/:lotId" element={<Slots />} />
           <Route path="booking/:slotId" element={<Booking />} />
+          <Route path="/ticket-history" element={<TicketHistory />} />
+          <Route path="/viewLot" element={<ViewLots />} />
+          <Route path="/addLot" element={<AddLots />} />
+
+
           </Routes>
       </BrowserRouter>
     </>

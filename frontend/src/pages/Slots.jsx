@@ -112,10 +112,9 @@ export default function Slots() {
             {slots.map((slot, index) => (
               <div
                 key={slot._id}
-                className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                className="relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
                 style={{ 
-                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
-                  boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                  animation: `fadeInUp 0.5s ease-out ${index * 0.05}s both`
                 }}
               >
                 {/* Status indicator */}
@@ -128,18 +127,16 @@ export default function Slots() {
                   ></div>
                 </div>
 
-                {/* Card background with gradient overlay */}
+                {/* Card background with simple overlay */}
                 <div 
-                  className="absolute inset-0 opacity-5"
+                  className="absolute inset-0 opacity-3 pointer-events-none"
                   style={{
-                    background: slot.status === "occupied" 
-                      ? 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)'
-                      : 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+                    backgroundColor: slot.status === "occupied" ? '#ef4444' : '#10b981'
                   }}
                 ></div>
 
                 {/* Card content */}
-                <div className="relative p-6">
+                <div className="relative p-6 z-10">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-3">
                       <div 
@@ -179,16 +176,10 @@ export default function Slots() {
                   {slot.status === "available" && (
                     <Link
                       to={`/booking/${slot._id}`}
-                      className="w-full inline-flex items-center justify-center px-6 py-3 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 shadow-lg hover:shadow-xl"
+                      className="w-full inline-flex items-center justify-center px-6 py-3 text-white font-semibold rounded-xl transition-all duration-200 hover:opacity-90 focus:outline-none shadow-md hover:shadow-lg relative z-20"
                       style={{
-                        background: 'linear-gradient(135deg, #fca311 0%, #f59e0b 100%)',
-                        boxShadow: '0 4px 15px rgba(252, 163, 17, 0.4)'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = 'linear-gradient(135deg, #fca311 0%, #f59e0b 100%)';
+                        backgroundColor: '#fca311',
+                        pointerEvents: 'auto'
                       }}
                     >
                       <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -211,8 +202,8 @@ export default function Slots() {
                   )}
                 </div>
 
-                {/* Hover shimmer effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 transition-all duration-700 group-hover:animate-shimmer"></div>
+                {/* Hover shimmer effect - simplified */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 hover:opacity-10 transition-opacity duration-300 pointer-events-none z-5"></div>
               </div>
             ))}
           </div>
@@ -238,7 +229,7 @@ export default function Slots() {
         )}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -252,45 +243,11 @@ export default function Slots() {
 
         @keyframes shimmer {
           0% {
-            transform: translateX(-100%) skewX(-12deg);
+            transform: translateX(-100%);
           }
           100% {
-            transform: translateX(200%) skewX(-12deg);
+            transform: translateX(200%);
           }
-        }
-
-        .animate-shimmer {
-          animation: shimmer 1.5s ease-in-out;
-        }
-
-        /* Smooth scrolling and responsive improvements */
-        @media (max-width: 640px) {
-          .grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .text-4xl {
-            font-size: 2.5rem;
-          }
-          .text-5xl {
-            font-size: 3rem;
-          }
-          .text-6xl {
-            font-size: 3.5rem;
-          }
-        }
-
-        /* Enhanced hover effects */
-        .group:hover .group-hover\\:animate-shimmer {
-          animation: shimmer 1.5s ease-in-out;
-        }
-
-        /* Loading skeleton improvements */
-        .animate-pulse {
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
         @keyframes pulse {
@@ -299,6 +256,26 @@ export default function Slots() {
           }
           50% {
             opacity: .5;
+          }
+        }
+
+        .animate-pulse {
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        @media (max-width: 640px) {
+          .grid {
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+          }
+          .text-4xl { 
+            font-size: 2.5rem !important; 
+          }
+          .text-5xl { 
+            font-size: 3rem !important; 
+          }
+          .text-6xl { 
+            font-size: 3.5rem !important; 
           }
         }
       `}</style>

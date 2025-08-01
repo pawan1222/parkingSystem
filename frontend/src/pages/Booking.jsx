@@ -342,14 +342,28 @@ export default function Booking() {
                 <div className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: '#f8fafc' }}>
                   <span className="font-medium" style={{ color: '#6b7280' }}>Vehicle:</span>
                   <span className="font-bold" style={{ color: '#14213d' }}>
-                    {ticket.vehicleNumber}
+                    {ticket.bookedTicket.vehicleNumber}
+                  </span>
+                </div>
+
+                 <div className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: '#f8fafc' }}>
+                  <span className="font-medium" style={{ color: '#6b7280' }}>Lot Name:</span>
+                  <span className="font-mono text-sm font-bold" style={{ color: '#14213d' }}>
+                    {ticket.bookedTicket.lotName}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: '#f8fafc' }}>
-                  <span className="font-medium" style={{ color: '#6b7280' }}>Slot ID:</span>
+                  <span className="font-medium" style={{ color: '#6b7280' }}>Lot Address:</span>
                   <span className="font-mono text-sm font-bold" style={{ color: '#14213d' }}>
-                    {ticket.bookedTicket.slotId}
+                    {ticket.bookedTicket.lotAddress}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: '#f8fafc' }}>
+                  <span className="font-medium" style={{ color: '#6b7280' }}>Slot Number:</span>
+                  <span className="font-mono text-sm font-bold" style={{ color: '#14213d' }}>
+                    {ticket.bookedTicket.slotNumber}
                   </span>
                 </div>
 
@@ -364,6 +378,13 @@ export default function Booking() {
                   <span className="font-medium" style={{ color: '#6b7280' }}>End Time:</span>
                   <span className="font-semibold text-sm" style={{ color: '#14213d' }}>
                     {new Date(ticket.bookedTicket.endTime).toLocaleString()}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: '#f8fafc' }}>
+                  <span className="font-medium" style={{ color: '#6b7280' }}>Charges:</span>
+                  <span className="font-semibold text-sm" style={{ color: '#14213d' }}>
+                    {ticket.bookedTicket.charges}
                   </span>
                 </div>
 

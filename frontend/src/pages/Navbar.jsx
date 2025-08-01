@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { Car, Menu, X, Home, MapPin, Plus, Eye, Settings, LogIn, UserPlus, LogOut, User, Shield } from "lucide-react";
+import { Car, Menu, X, Home, MapPin, Plus, Eye, Settings, LogIn, UserPlus, LogOut, User, Shield, Ticket } from "lucide-react";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -34,6 +34,10 @@ export default function Navbar() {
   const navLinks = [
     { to: "/", label: "Home", icon: Home, public: true },
     { to: "/lotsByCity", label: "Lots", icon: MapPin, public: true },
+  ];
+
+  const userLinks = [
+    { to: "/ticket-history", label: "My Tickets", icon: Ticket },
   ];
 
   const adminLinks = [
@@ -95,6 +99,25 @@ export default function Navbar() {
                   </Link>
                 );
               })}
+
+              {/* User Links (for logged-in users) */}
+              {user && (
+                <div className="flex items-center space-x-1 ml-2 pl-2 border-l border-[#fca311]/20">
+                  {userLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        className="group flex items-center space-x-2 px-3 py-2 rounded-xl text-[#e5e5e5] hover:text-[#fca311] hover:bg-[#fca311]/10 transition-all duration-300"
+                      >
+                        <Icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                        <span className="font-medium text-sm">{link.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
 
               {/* Admin Links */}
               {user?.role === "admin" && (
@@ -204,6 +227,29 @@ export default function Navbar() {
                 );
               })}
             </div>
+
+            {/* User Links Mobile (for logged-in users) */}
+            {user && (
+              <div className="space-y-2 mb-6 pt-4 border-t border-[#fca311]/20">
+                <div className="px-4 mb-3">
+                  <span className="text-[#fca311] text-sm font-semibold uppercase tracking-wide">My Account</span>
+                </div>
+                {userLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      className="flex items-center space-x-3 px-4 py-3 rounded-xl text-[#e5e5e5] hover:text-[#fca311] hover:bg-[#fca311]/10 transition-all duration-300"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <Icon className="w-5 h-5" />
+                      <span className="font-medium">{link.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Admin Links Mobile */}
             {user?.role === "admin" && (

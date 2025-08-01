@@ -1,4 +1,5 @@
 import { Booking } from "../models/booking.model.js";
+import { parkingLot } from "../models/parkingLot.model.js";
 import { Slot } from "../models/slot.model.js";
 import { Vehicle } from "../models/vehicle.model.js";
 
@@ -14,6 +15,8 @@ export const bookTicket = async (req, res) => {
     const { vehicleNumber, startTime, endTime, slotId } = req.body;
 
     const slot = await Slot.findById(slotId);
+    const lot = await parkingLot.findById(slot.parkingLotId);
+
     if (slot.status != "available") {
         return res.status(401).json({ msg: "slot not available" });
     }
@@ -68,6 +71,11 @@ export const bookTicket = async (req, res) => {
 
 
     const bookedTicket = await Booking.create({
+        lotName : lot.name,
+        lotAddress : lot.address,
+        slotNumber : slot.slotNumber,
+        vehicleNumber : vehicle.vehicleNumber,
+        userId : req.user._id,
         vehicleId: vehicle._id,
         startTime,
         endTime,
@@ -96,5 +104,9 @@ export const bookTicket = async (req, res) => {
     }, diffMilli + (start - Date.now()));
 
 
-    return res.status(201).json({ msg: "ticket booked successfully", ticket: { bookedTicket, vehicleNumber } });
+    return res.status(201).json({ msg: "ticket booked successfully", ticket: { bookedTicket} });
 }
+
+
+
+

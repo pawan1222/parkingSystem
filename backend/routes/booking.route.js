@@ -4,5 +4,5 @@ import { bookTicket } from "../controllers/booking.controller.js";
 
 const router = express.Router();
 
-router.post('/book',authorize,bookTicket)
+router.post('/book',authorize,bookTicket);
 export default router
