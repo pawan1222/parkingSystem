@@ -8,8 +8,9 @@ import cors from "cors"
 import path from "path";
 
 const app = express();
-
 const __dirname = path.resolve();
+
+
 
 
 app.use(cookieParser())
@@ -36,5 +37,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
+
 
 export default app;
