@@ -37,7 +37,8 @@ export default function Booking() {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/bookSlot/book",
+        `${import.meta.env.VITE_BASE_URL}/api/bookSlot/book`,
+
         {
           vehicleNumber,
           startTime,

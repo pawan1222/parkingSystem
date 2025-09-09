@@ -15,7 +15,7 @@ export default function ViewLots() {
       
       // Your actual API call - uncomment this and remove mock data above
       
-      const res = await axios.get("http://localhost:4000/api/user/lots", {
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/lots`, {
         withCredentials: true, // needed if auth is cookie-based
       });
       setLots(res.data.lots); // assumes { lots: [...] }

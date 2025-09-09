@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/user/currentUser", {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/currentUser`, {
           withCredentials: true,
         });
         console.log("Curr User" , res);

@@ -20,7 +20,7 @@ export default function TicketHistory() {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/user/tickets", {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/tickets`, {
           withCredentials: true,
         });
         setTickets(res.data.tickets || []);

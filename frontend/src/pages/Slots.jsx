@@ -12,7 +12,7 @@ export default function Slots() {
     const fetchSlots = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`http://localhost:4000/api/slots/getSlots/${lotId}`, {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/slots/getSlots/${lotId}`, {
           withCredentials: true,
         });
         setSlots(res.data.data || []);

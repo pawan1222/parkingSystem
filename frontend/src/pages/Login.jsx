@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { Mail, Lock, Eye, EyeOff, Car, ArrowRight, CheckCircle, XCircle } from "lucide-react";
 
 export default function Login() {
-  const API_URL = "http://localhost:4000/api";
+  const API_URL = `${import.meta.env.VITE_BASE_URL}/api`;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");

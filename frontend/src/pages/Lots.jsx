@@ -22,7 +22,7 @@ export default function Lots() {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/lot/getLotsByCity",
+        `${import.meta.env.VITE_BASE_URL}/api/lot/getLotsByCity`,
         { city: city.trim() },
         { withCredentials: true }
       );

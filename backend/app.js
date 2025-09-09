@@ -26,9 +26,4 @@ app.use('/api/lot',parkingRoutes)
 app.use('/api/slots',slotRoutes)
 app.use('/api/bookSlot',bookingRoutes)
 
-
-
-
-
-
 export default app;

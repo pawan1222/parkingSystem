@@ -21,7 +21,7 @@ export default function Navbar() {
 
   const logout = async () => {
     try {
-      await axios("http://localhost:4000/api/user/logout", {
+      await axios(`${import.meta.env.VITE_BASE_URL}/api/user/logout`, {
         withCredentials: true,
       });
       setUser(null); // clear user from context

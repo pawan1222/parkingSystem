@@ -31,7 +31,7 @@ export default function Register() {
 
     setIsLoading(true);
     try {
-      const res = await axios.post("http://localhost:4000/api/user/register", formData);
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/user/register`, formData);
       console.log("Registration response:", res.data);
       setMessage("Registration successful!");
       setSuccess(true);
