@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-const API_URL = import.meta.env.VITE_API_URL;
+import axios from 'axios';
 export default function AddLots() {
   const [formData, setFormData] = useState({
     name: "",
@@ -34,6 +34,17 @@ export default function AddLots() {
       // Simulate API call - replace with actual axios call in your implementation
       await new Promise(resolve => setTimeout(resolve, 1500));
       
+      const res = await axios.post(
+  "http://localhost:4000/api/lot/addLot",
+  {
+    name: formData.name,
+    city: formData.city,
+    address: formData.address,
+    totalSlots: Number(formData.totalSlots),
+  },
+  { withCredentials: true }
+);
+
       // Simulate successful response
       console.log("Adding lot:", {
         name: formData.name,
