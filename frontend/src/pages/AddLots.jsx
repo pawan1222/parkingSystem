@@ -35,7 +35,7 @@ export default function AddLots() {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       const res = await axios.post(
-  "http://localhost:4000/api/lot/addLot",
+  `${import.meta.env.VITE_BASE_URL}/api/lot/addLot`,
   {
     name: formData.name,
     city: formData.city,
