@@ -80,7 +80,7 @@ export default function Home() {
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+{/*           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
             <Link
               to="/lotsByCity"
               className="group relative bg-gradient-to-r from-[#fca311] to-[#fca311]/80 text-black px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-[#fca311]/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
@@ -105,7 +105,7 @@ export default function Home() {
             >
               Get Started
             </Link>
-          </div>
+          </div> */}
         </div>
 
         {/* Features Section */}
